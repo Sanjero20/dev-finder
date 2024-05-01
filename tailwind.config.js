@@ -9,8 +9,10 @@ export default {
         dark: "#141c30",
       },
       colors: {
-        dark: "#1f2a48",
-        light: "#fefefe",
+        container: {
+          DEFAULT: "#fefefe",
+          dark: "#1f2a48",
+        },
         primary: "#0079ff",
       },
     },
