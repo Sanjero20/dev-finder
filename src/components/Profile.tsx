@@ -1,4 +1,5 @@
 import { Building, Link, MapPin, Twitter } from "lucide-react";
+import Avatar from "./Profile/Avatar";
 
 // From https://api.github.com/
 const data = {
@@ -41,23 +42,21 @@ function Profile() {
   return (
     <section className="flex h-full min-h-96 w-full gap-8 rounded-lg bg-container p-8 drop-shadow-lg dark:bg-container-dark">
       {/* Left */}
-      <div className="hidden w-36 lg:block">
-        <img src={data.avatar_url} alt="avatar" className="rounded-full" />
-      </div>
+      <a href={data.html_url} className="hidden h-fit rounded-full lg:block">
+        <Avatar src={data.avatar_url} />
+      </a>
 
       {/* Right */}
       <div className="flex w-full flex-col gap-6">
         <div className="flex gap-6">
-          <img
-            src={data.avatar_url}
-            alt="avatar"
-            className="w-24 rounded-full lg:hidden"
-          />
+          <a href={data.html_url} className="rounded-full lg:hidden">
+            <Avatar src={data.avatar_url} />
+          </a>
 
           <div className="flex w-full flex-col lg:flex-row lg:justify-between">
             <div>
               <p className="text-xl font-bold">{data.name}</p>
-              <a href={data.html_url} className="text-primary">
+              <a href={data.html_url} className="text-primary hover:underline">
                 @{data.login}
               </a>
             </div>
@@ -99,7 +98,7 @@ function Profile() {
           </div>
 
           <div className="order-3 flex items-center gap-4 sm:order-2">
-            <Twitter fill="white" />
+            <Twitter />
             {data.twitter_username || "Not Available"}
           </div>
 
