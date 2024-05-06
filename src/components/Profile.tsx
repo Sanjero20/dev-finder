@@ -1,5 +1,7 @@
 import { Building, Link, MapPin, Twitter } from "lucide-react";
-import Avatar from "./Profile/Avatar";
+import Avatar from "./ui/Avatar";
+import CountDisplay from "./ui/CountDisplay";
+import IconLink from "./ui/IconLink";
 
 // From https://api.github.com/
 const data = {
@@ -41,7 +43,7 @@ const data = {
 function Profile() {
   return (
     <section className="flex h-full min-h-96 w-full gap-8 rounded-lg bg-container p-8 drop-shadow-lg dark:bg-container-dark">
-      {/* Left */}
+      {/* Left - only visible on desktop */}
       <a href={data.html_url} className="hidden h-fit rounded-full lg:block">
         <Avatar src={data.avatar_url} />
       </a>
@@ -49,10 +51,12 @@ function Profile() {
       {/* Right */}
       <div className="flex w-full flex-col gap-6">
         <div className="flex gap-6">
+          {/* Only visible on mobile */}
           <a href={data.html_url} className="rounded-full lg:hidden">
             <Avatar src={data.avatar_url} />
           </a>
 
+          {/* Personal Information */}
           <div className="flex w-full flex-col lg:flex-row lg:justify-between">
             <div>
               <p className="text-xl font-bold">{data.name}</p>
@@ -67,45 +71,39 @@ function Profile() {
 
         <p>{data.bio || "This profile has no bio"}</p>
 
-        {/* Account repos */}
-        <div className="flex h-fit w-full justify-between gap-4 rounded-lg bg-light p-4 text-center dark:bg-dark sm:text-left ">
-          <div>
-            <p>Repos</p>
-            <p className="text-lg font-bold">{data.public_repos}</p>
-          </div>
-
-          <div>
-            <p>Followers</p>
-            <p className="text-lg font-bold">{data.followers}</p>
-          </div>
-
-          <div>
-            <p>Following</p>
-            <p className="text-lg font-bold">{data.following}</p>
-          </div>
+        {/* Github Account Info */}
+        <div className="flex h-fit w-full justify-between gap-4 rounded-lg bg-light p-4 dark:bg-dark">
+          <CountDisplay title="Repos" count={data.public_repos} />
+          <CountDisplay title="Followers" count={data.followers} />
+          <CountDisplay title="Following" count={data.following} />
         </div>
 
         {/* Links */}
         <div className="grid w-full gap-4 text-sm sm:grid-cols-2">
-          <div className="order-1 flex items-center gap-4">
-            <MapPin />
-            {data.location}
-          </div>
+          <IconLink
+            className="order-1 sm:order-1"
+            icon={<MapPin />}
+            text={data.location}
+          />
 
-          <div className="order-2 flex items-center gap-4 sm:order-3">
-            <Link />
-            {data.blog}
-          </div>
+          <IconLink
+            className="order-2 sm:order-3"
+            icon={<Link />}
+            text={data.blog}
+            isLink
+          />
 
-          <div className="order-3 flex items-center gap-4 sm:order-2">
-            <Twitter />
-            {data.twitter_username || "Not Available"}
-          </div>
+          <IconLink
+            className="order-3 sm:order-2"
+            icon={<Twitter />}
+            text={data.twitter_username}
+          />
 
-          <div className="order-4 flex items-center gap-4">
-            <Building />
-            {data.company || "Not Available"}
-          </div>
+          <IconLink
+            className="order-4 sm:order-4"
+            icon={<Building />}
+            text={data.company}
+          />
         </div>
       </div>
     </section>
