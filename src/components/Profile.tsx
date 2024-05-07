@@ -2,6 +2,7 @@ import { Building, Link, MapPin, Twitter } from "lucide-react";
 import Avatar from "./ui/Avatar";
 import CountDisplay from "./ui/CountDisplay";
 import IconLink from "./ui/IconLink";
+import { formatDate } from "../utils/formatDate";
 
 interface ProfileProps {
   data: any;
@@ -34,7 +35,7 @@ function Profile({ data }: ProfileProps) {
               </a>
             </div>
 
-            <p className="mt-2 lg:mt-0">Joined {"DD MMM YYYY"}</p>
+            <p className="mt-2 lg:mt-0">Joined {formatDate(data.created_at)}</p>
           </div>
         </div>
 
