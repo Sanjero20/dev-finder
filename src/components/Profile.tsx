@@ -3,46 +3,15 @@ import Avatar from "./ui/Avatar";
 import CountDisplay from "./ui/CountDisplay";
 import IconLink from "./ui/IconLink";
 
-// From https://api.github.com/
-const data = {
-  login: "Sanjero20",
-  id: 94424813,
-  node_id: "U_kgDOBaDO7Q",
-  avatar_url: "https://avatars.githubusercontent.com/u/94424813?v=4",
-  gravatar_id: "",
-  url: "https://api.github.com/users/Sanjero20",
-  html_url: "https://github.com/Sanjero20",
-  followers_url: "https://api.github.com/users/Sanjero20/followers",
-  following_url:
-    "https://api.github.com/users/Sanjero20/following{/other_user}",
-  gists_url: "https://api.github.com/users/Sanjero20/gists{/gist_id}",
-  starred_url: "https://api.github.com/users/Sanjero20/starred{/owner}{/repo}",
-  subscriptions_url: "https://api.github.com/users/Sanjero20/subscriptions",
-  organizations_url: "https://api.github.com/users/Sanjero20/orgs",
-  repos_url: "https://api.github.com/users/Sanjero20/repos",
-  events_url: "https://api.github.com/users/Sanjero20/events{/privacy}",
-  received_events_url: "https://api.github.com/users/Sanjero20/received_events",
-  type: "User",
-  site_admin: false,
-  name: "Angelo Santos",
-  company: null,
-  blog: "sanjero20.github.io",
-  location: "Batangas City, Philippines",
-  email: null,
-  hireable: null,
-  bio: "Better things take a little longer...",
-  twitter_username: null,
-  public_repos: 32,
-  public_gists: 0,
-  followers: 24,
-  following: 28,
-  created_at: "2021-11-16T03:40:15Z",
-  updated_at: "2024-05-03T04:54:37Z",
-};
+interface ProfileProps {
+  data: any;
+}
 
-function Profile() {
+function Profile({ data }: ProfileProps) {
+  if (!data) return;
+
   return (
-    <section className="flex h-full min-h-96 w-full gap-8 rounded-lg bg-container p-8 drop-shadow-lg dark:bg-container-dark">
+    <>
       {/* Left - only visible on desktop */}
       <a href={data.html_url} className="hidden h-fit rounded-full lg:block">
         <Avatar src={data.avatar_url} />
@@ -106,7 +75,7 @@ function Profile() {
           />
         </div>
       </div>
-    </section>
+    </>
   );
 }
 
